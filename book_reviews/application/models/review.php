@@ -27,6 +27,4 @@ class Review extends CI_Model {
 		$values = array($book['user_id'], $book['book_id'], $book['review'], $book['rating']);
 		return $this->db->query($query2, $values);
 	}
-
-	public function retrieve_authors()
 }

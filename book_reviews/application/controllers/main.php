@@ -60,7 +60,7 @@ class Main extends CI_Controller {
 			$this->load->Model('Review');
 			$this->Review->add_book($book);
 			$book['book_id'] = $this->db->insert_id();
-			$this->add_review($book);
+			$this->Review->add_review($book);
 		}
 		else 
 		{
@@ -68,11 +68,7 @@ class Main extends CI_Controller {
 		}
 	}
 
-	public function add_review($book)
-	{
-		$this->load->Model('Review');
-		$this->Review->add_review($book);
-	}
+
 }
 
 //end of main controller
