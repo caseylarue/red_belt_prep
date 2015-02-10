@@ -10,7 +10,7 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-		$this->session->sess_destroy();
+		// $this->session->sess_destroy();
 		$this->load->view('index');
 	}
 
@@ -23,7 +23,7 @@ class Main extends CI_Controller {
 		{
 			$this->session->set_userdata('id', $results['id']);
 			$this->session->set_userdata('alias', $results['alias']);
-			$this->books();
+			redirect('/main/home');
 		}
 		else
 		{
@@ -33,17 +33,34 @@ class Main extends CI_Controller {
 
 	public function register()
 	{
-		$user = $this->input->post();
-		$this->load->Model('Review');
-		$this->Review->register($user);
-		$this->session->set_userdata('id', $this->db->insert_id());
-		$this->session->set_userdata('alias', $user['alias']);
-		redirect('/main/books');
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules("first_name", "First Name", "required");
+		$this->form_validation->set_rules("last_name", "Last Name", "required");
+		$this->form_validation->set_rules("alias", "Alias", "required");
+		$this->form_validation->set_rules("email", "Email", "required|valid_email|is_unique[users.email]");
+		$this->form_validation->set_rules("password", "Password", "min_length[8]");
+		$this->form_validation->set_rules("password_confirm", "Password Confirmation", "matches[confirm_password]");
+		
+		if($this->form_validation->run() ===  FALSE)
+		{
+			// the flashdata does not show
+			$this->session->set_flashdata('validation_error',validation_errors());	
+			$this->index();
+		}
+		else
+		{
+			$user = $this->input->post();
+			$this->load->Model('Review');
+			$this->Review->register($user);
+			$this->session->set_userdata('id', $this->db->insert_id());
+			$this->session->set_userdata('alias', $user['alias']);
+			redirect('/main/home');
+		}
 	}
 
-	public function books()
+	public function home()
 	{
-		$this->load->view('books');
+		$this->load->view('home');
 	}
 
 	public function add()
@@ -53,19 +70,28 @@ class Main extends CI_Controller {
 
 	public function add_book()
 	{
+		// add to authors table
 		$data = $this->input->post();
-		if($data['author_existing'] == 'new')
-		{
-			$book = $this->input->post();
-			$this->load->Model('Review');
-			$this->Review->add_book($book);
-			$book['book_id'] = $this->db->insert_id();
-			$this->Review->add_review($book);
-		}
-		else 
-		{
-			echo "this is not a new author!";
-		}
+		var_dump($data);
+		// if($data['author_existing'] == 'new')
+		// {
+		// 	$book = $this->input->post();
+		// 	$this->load->Model('Review');
+			
+		// 	$this->Review->add_book($book);
+		// 	$book['book_id'] = $this->db->insert_id();
+		// 	$this->Review->add_review($book);
+		// }
+		// else 
+		// {
+			// add feature to check the db if it is in fact a new author
+		// 	echo "this is not a new author!";
+		// }
+
+		// add to books table
+
+		// add to reviews table
+
 	}
 
 

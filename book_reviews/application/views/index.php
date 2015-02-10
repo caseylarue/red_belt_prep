@@ -5,6 +5,14 @@
 		#container {
 			margin-top: 40px;
 			margin-left: 25px;
+		/*	width: 970px;
+			height: 100px;*/
+		}
+		#registration, #login {
+			display: inline-block;
+			vertical-align: top;
+			width: 300px;
+			margin: 0px 40px;
 		}
 		form label, input {
 			display: block;
@@ -18,12 +26,20 @@
 </head>
 <body>
 	<div id='container'>
-		<h1>Welcome!</h1>
+		<h1>Welcome to our awesome book reviews website!</h1>
+<?php
+		if($this->session->flashdata("validation_error"))
+		{
+			echo $this->session->flashdata("validation_error");
+		}
+?>
 		<div id='registration'>
 			<h2>Registration</h2>
 			<form action='/main/register' method='post'>
-				<label>Name:</label>
-				<input type='text' name='name'>
+				<label>First Name:</label>
+				<input type='text' name='first_name'>
+				<label>Last Name:</label>
+				<input type='text' name='name_name'>
 				<label>Alias:</label>
 				<input type='text' name='alias'>
 				<label>Email:</label>
