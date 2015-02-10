@@ -6,9 +6,12 @@
 			display: block;
 			margin: 10px;
 		}
+		#title, #author {
+			height: 30px;
+		}
 		textarea {
 			height: 100px;
-			width: 200px;
+			width: 400px;
 		}
 	</style>
 </head>
@@ -19,7 +22,7 @@
 	<form action='/main/add_book' method='post'>
 		<label>Book Title</label>
 		<input type='hidden' name='user_id' value='<?= $this->session->userdata('id'); ?>'>
-		<input type='text' name='title' placeholder='book title'>
+		<textarea id='title' name='title' placeholder='book title'></textarea>
 		<label>Author</label>
 		<select name='author_existing'>
 			<option value='new'>New Author</option>
@@ -27,9 +30,12 @@
 			<option value='#'>Existing Author</option>
 			<option value='#'>Existing Author</option>
 		</select>
-		<input type='text' name='author_new' placeholder='new author'>
+		<label>First Name</label>
+		<input type='text' name='first_name'>
+		<label>Last Name</label>
+		<input type='text' name='last_name'>
 		<label>Review</label>
-		<textarea name='review'></textarea>
+		<textarea name='review' placeholder='place review here'></textarea>
 		<label>Rating</label>
 		<select name='rating'>
 			<option value='1'>1</option>

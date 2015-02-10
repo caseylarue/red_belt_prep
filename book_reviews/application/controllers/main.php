@@ -58,42 +58,54 @@ class Main extends CI_Controller {
 		}
 	}
 
+	public function get_reviews()
+	{
+		$this->load->Model('Review');
+		$this->Review->get_reviews();
+	}
+
 	public function home()
 	{
 		$this->load->view('home');
 	}
 
+
 	public function add()
 	{
-		$this->load->view('add');
+		$this->load->view('add_review');
 	}
 
 	public function add_book()
 	{
 		// add to authors table
 		$data = $this->input->post();
-		var_dump($data);
-		// if($data['author_existing'] == 'new')
-		// {
-		// 	$book = $this->input->post();
-		// 	$this->load->Model('Review');
-			
-		// 	$this->Review->add_book($book);
-		// 	$book['book_id'] = $this->db->insert_id();
-		// 	$this->Review->add_review($book);
-		// }
-		// else 
-		// {
-			// add feature to check the db if it is in fact a new author
-		// 	echo "this is not a new author!";
-		// }
+		if($data['author_existing'] == 'new')
+		{
+			// add form validation is unique
+			$input = $this->input->post();
+			$this->load->Model('Review');
+			$this->Review->add_author($input);
 
-		// add to books table
+			$input['author_id'] = $this->db->insert_id();
+			$this->Review->add_book($input);
 
-		// add to reviews table
-
+ 
+			$input['book_id'] = $this->db->insert_id();
+			$input['user_id'] = $this->session->userdata('id');
+			$this->Review->add_review($input);
+			$this->get_reviews();
+		}
+		else 
+		{
+			echo "this is not a new author!";
+		}
 	}
 
+	public function get_reviews()
+	{
+
+		redirect('/main/reviews/'.$input['book_id'])
+	}
 
 }
 
