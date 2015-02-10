@@ -35,8 +35,20 @@ class Review extends CI_Model {
 		return $this->db->query($query2, $values);
 	}
 
-	public function get_reviews()
+	public function get_reviews($book_id)
 	{
-		return $this->db->query("SELECT * FROM users WHERE email = ?", array($user['email']))->results_array();
+		return $this->db->query("SELECT books.id as book_id, books.title, authors.first_name as author_first_name, authors.last_name as author_last_name, reviews.rating, users.id as user_id, users.first_name as reviewer_first_name, users.last_name as reviewer_last_name, users.alias, reviews.review, reviews.created_at
+			FROM reviews
+			JOIN books on books.id = reviews.book_id
+			JOIN users on users.id = reviews.user_id
+			JOIN authors on authors.id = books.author_id
+			WHERE books.id=$book_id")->result_array();
 	}
 }
+
+
+
+
+
+
+

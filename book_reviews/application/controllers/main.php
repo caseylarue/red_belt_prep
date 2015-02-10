@@ -58,17 +58,11 @@ class Main extends CI_Controller {
 		}
 	}
 
-	public function get_reviews()
-	{
-		$this->load->Model('Review');
-		$this->Review->get_reviews();
-	}
-
+	
 	public function home()
 	{
 		$this->load->view('home');
 	}
-
 
 	public function add()
 	{
@@ -93,7 +87,8 @@ class Main extends CI_Controller {
 			$input['book_id'] = $this->db->insert_id();
 			$input['user_id'] = $this->session->userdata('id');
 			$this->Review->add_review($input);
-			$this->get_reviews();
+			$book_id = $input['book_id'];
+			redirect('/main/get_reviews/'.$book_id);
 		}
 		else 
 		{
@@ -101,10 +96,11 @@ class Main extends CI_Controller {
 		}
 	}
 
-	public function get_reviews()
+	public function get_reviews($book_id)
 	{
-
-		redirect('/main/reviews/'.$input['book_id'])
+		$this->load->Model('Review');
+		$reviews = $this->Review->get_reviews($book_id);
+		$this->load->view('reviews', array('reviews' => $reviews));
 	}
 
 }
