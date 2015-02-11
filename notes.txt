@@ -1,0 +1,107 @@
+Questions
+
+#1 My flashdata is not working on registration.
+Where there is an error when someone registers after redirect back ot index.php it does not show the error message in flash data until after refreash.
+
+
+STORIES
+
+* Login - get validations up and running for registration
+//almost done, see comment above
+
+=================================
+
+* 1 home - display 3 most recent book reviews
+<p>Title</p>
+			<p>Rating</p>
+			<p>Reviewer: 
+			Review______</p>
+			<p>Posted On: Date</p>
+SELECT books.title, reviews.rating, users.id, users.first_name, users.last_name, reviews.review, reviews.created_at
+FROM reviews
+JOIN books on books.id = reviews.book_id
+JOIN users on users.id = reviews.user_id
+GROUP BY title;
+
+SELECT books.title, reviews.rating, users.id users.first_name, users.last_name, reviews.review, reviews.created_at
+FROM reviews
+JOIN books on books.id = reviews.book_id
+JOIN users on user.id = review.user_id
+
+
+* 2 home - display listing of book titles with reviews
+3 home - link book title to books individual page
+4 home - link user name to individual page
+
+
+=================================
+
+
+3 add_review - enable a drop down list of authors 
+
+=================================
+
+
+3 book_page - able to delete reviews the current user wrote
+
+=================================
+
+
+3 user_page - show books that have been reviewed 
+4 user_page - addd hyperlinks to book reviews
+
+
+
+
+========================
+- 
+-make sure there are not duplicates in the authors or books table
+
+
+
+recent book reviews
+Query title, rating, reviewer, review, posted on
+
+books.title, reviews.rating, reviews.review, users.alias, reviews.created_at 
+FROM reviews
+JOIN books ON reviews.book_id = books.id
+JOIN users on users.id = user_id
+
+/////////
+add a review:
+
+feature
+on inital load: query db for list of authors
+on inital load: query db for list of books
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

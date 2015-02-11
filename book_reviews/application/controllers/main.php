@@ -61,7 +61,10 @@ class Main extends CI_Controller {
 	
 	public function home()
 	{
-		$this->load->view('home');
+		$this->load->model('Review');
+		$reviews = $this->Review->get_latest_reviews();
+		$books = $this->Review->get_books_reviewed();
+		$this->load->view('home', array('reviews' => $reviews, 'books' => $books));
 	}
 
 	public function add()
@@ -101,6 +104,23 @@ class Main extends CI_Controller {
 		$this->load->Model('Review');
 		$reviews = $this->Review->get_reviews($book_id);
 		$this->load->view('reviews', array('reviews' => $reviews));
+	}
+
+	public function add_review($book_id)
+	{
+		$input = $this->input->post();
+		$this->load->Model('Review');
+		$this->Review->add_review($input);
+		redirect('/main/get_reviews/'.$book_id);
+	}
+
+	public function user_page($user_id)
+	{
+		$this->load->Model('Review');
+		$info = $this->Review->get_user_info($user_id);
+		$reviews = $this->Review->get_user_reviews($user_id);
+		$count = $this->Review->count_user_reviews($user_id);
+		$this->load->view('user_page', array('info' => $info, 'reviews' => $reviews, 'count' => $count));
 	}
 
 }
