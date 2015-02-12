@@ -19,9 +19,9 @@ class Messages extends CI_Controller {
 		$this->load->view('login');
 	}
 
-	public function nav_pre_login()
+	public function nav_post_login()
 	{
-		$this->load->view('nav_pre_login');
+		$this->load->view('nav_post_login');
 	}
 
 	public function login()

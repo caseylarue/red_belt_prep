@@ -20,6 +20,9 @@
 	</style>
 </head>
 <body>
+<?php
+	require('nav_post_login.php');
+?>
 	<h1>All Users</h1>
 	<table>
 		<thead>
