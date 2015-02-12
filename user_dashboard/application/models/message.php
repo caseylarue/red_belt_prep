@@ -19,4 +19,27 @@ class Message extends CI_Model {
 		return $this->db->query("SELECT * FROM users WHERE users.email=?", array($email))->row_array();
 	}
 
+	public function get_all_users()
+	{
+		return $this->db->query("SELECT * FROM users")->result_array();
+	}
+
+	public function get_user_info($id)
+	{
+		return $this->db->query("SELECT * FROM users WHERE id=?", array($id))->row_array();
+	}
+
+	public function admin_edit_user($user)
+	{
+		$data = array(
+				'first_name' => $user['first_name'],
+				'last_name' => $user['last_name'],
+				'email' => $user['email'],
+				'user_type' => $user['user_type'],
+				'updated_at' => $user['updated_at'] 
+			);
+		$this->db->where('id', $user['id']);
+		$this->db->update('users', $data);
+	}
+
 }

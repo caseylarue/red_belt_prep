@@ -1,16 +1,10 @@
 Stories for user dashboard project
 
-login_registration - build login (compare email & pw to db)
-login_registration - build registration 
-login_registration - have the first person be automatically registered as admin
-
 nav_pre_login - Wall, Home, Sign In
 
 nav - Wall, Dashboard, Profile, Logoff
 
-admin_dashboard - list of all users
 admin_dashboard - hyperlink from name to userpage
-admin_dashboard - actions: edit user info (go to edit_user_admin pg)
 admin_dashboard - actions: remove on each user
 admin_dashboard - add new user button (go to add_new_user pg)
 admin_dashboard - enable popup that asks if you are sure you want to remove

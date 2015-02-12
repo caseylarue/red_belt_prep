@@ -85,8 +85,26 @@ class Messages extends CI_Controller {
 
 	public function admin_dashboard()
 	{
-		echo "admin_dashboard";
-		// $this->load->('user_dashboard')
+		$this->load->Model('Message');
+		$users = $this->Message->get_all_users();
+		$array = array('users' => $users);
+		$this->load->view('admin_dashboard', $array);
+	}
+
+	public function admin_edit_user($id)
+	{
+		$this->load->Model('Message');
+		$user = $this->Message->get_user_info($id);
+		$this->load->view('admin_edit_user', array('id' => $id, 'user' => $user));
+	}
+
+	public function admin_edit_user_info($id)
+	{
+		$user = $this->input->post();
+		$user['updated_at'] = date('Y-m-d h:i:s');
+		$this->load->Model('Message');
+		$this->Message->admin_edit_user($user);
+		redirect('/messages/admin_dashboard');
 	}
 }
 
