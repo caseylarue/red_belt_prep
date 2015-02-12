@@ -9,6 +9,19 @@
 			padding: 5px;
 		}
 	</style>
+	<script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.remove').click(function(){
+				if(window.confirm('Are you sure?')) {
+					$('#content').load($(this).attr('href'));
+				}
+				else {
+					return false;
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 
@@ -32,7 +45,7 @@
 		<td><?= $user['email'] ?></td>
 		<td><?= $user['created_at'] ?></td>
 		<td><?= $user['user_type'] ?></td>
-		<td><a href="/messages/admin_edit_user/<?= $user['id'] ?>">edit</a> <a href="/messages/admin_remove_user/<?= $user['id'] ?>">remove</a></td>
+		<td><a href="/messages/admin_edit_user/<?= $user['id'] ?>">edit</a> <a class='remove' href="/messages/admin_remove_user/<?= $user['id'] ?>">remove</a></td>
 	</tr>
 <?php
 	}

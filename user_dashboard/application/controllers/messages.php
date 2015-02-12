@@ -106,6 +106,11 @@ class Messages extends CI_Controller {
 		$this->Message->admin_edit_user($user);
 		redirect('/messages/admin_dashboard');
 	}
+
+	public function admin_remove_user($id)
+	{
+		
+	}
 }
 
 //end of main controller
