@@ -10,7 +10,18 @@ class Messages extends CI_Controller {
 
 	public function index()
 	{
+		$this->session->sess_destroy();
 		$this->load->view('index');
+	}
+
+	public function load_login()
+	{
+		$this->load->view('login');
+	}
+
+	public function nav_pre_login()
+	{
+		$this->load->view('nav_pre_login');
 	}
 
 	public function login()
@@ -34,7 +45,7 @@ class Messages extends CI_Controller {
 		else
 		 {
            $this->session->set_flashdata("login_error", "Invaild email or password!");
-           redirect("/messages/index");
+           redirect("/messages/login");
           } 
 	}
 
