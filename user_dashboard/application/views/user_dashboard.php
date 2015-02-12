@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Admin Dashboard</title>
+	<title>User Dashboard</title>
 	<style type="text/css">
 		thead td {
 			font-weight: bold;
@@ -8,7 +8,7 @@
 		td {
 			padding: 5px;
 		}
-		.add_new {
+		.edit_info {
 			background-color: blue;
 			font-weight: bold;
 			color: white;
@@ -18,21 +18,9 @@
 			padding: 10px;
 		}
 	</style>
-	<script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('.remove').click(function(){
-				if(window.confirm('Are you sure?')) {
-					$('#content').load($(this).attr('href'));
-				}
-				else {
-					return false;
-				}
-			});
-		});
-	</script>
 </head>
 <body>
+	<h1>All Users</h1>
 	<table>
 		<thead>
 			<td>ID</td>
@@ -40,7 +28,6 @@
 			<td>Email</td>
 			<td>Created At</td>
 			<td>User Level</td>
-			<td>Actions</td>
 		</thead>
 		<tbody>
 	<?php
@@ -53,15 +40,14 @@
 			<td><?= $user['email'] ?></td>
 			<td><?= $user['created_at'] ?></td>
 			<td><?= $user['user_type'] ?></td>
-			<td><a href="/messages/admin_edit_user/<?= $user['id'] ?>">edit</a> <a class='remove' href="/messages/admin_remove_user/<?= $user['id'] ?>">remove</a></td>
 		</tr>
 	<?php
 		}
 	?>
 		</tbody>
 	</table>
-	<form action='/messages/admin_add_user' method='post'>
-		<button class='add_new'>Add New User</button>
+	<form action='/messages/edit_user_info/<?= $this->session->userdata('id') ?>' method='post'>
+		<button class='edit_info'>Edit Your Info</button>
 	</form>
 </body>
 </html>

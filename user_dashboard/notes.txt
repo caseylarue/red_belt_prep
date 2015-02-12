@@ -4,16 +4,6 @@ nav_pre_login - Wall, Home, Sign In
 
 nav - Wall, Dashboard, Profile, Logoff
 
-admin_dashboard - hyperlink from name to userpage
-admin_dashboard - actions: remove on each user
-admin_dashboard - add new user button (go to add_new_user pg)
-admin_dashboard - enable popup that asks if you are sure you want to remove
-
-add_new_user - add info of this new user to db
-add_new_user - create a return to dashboard button
-
-main_dashboard - list of all users
-main_dashboard - hyperlink for each user name that goes to their message board
 main_dashboard - enable a button that links to the user in session to change their own profile (edit_user pg)
 
 edit_user - allow users or admins to change user information
