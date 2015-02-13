@@ -74,6 +74,7 @@ class Review extends CI_Model {
 		reviews.review,
 		reviews.rating,
 		reviews.created_at,
+		books.id as book_id,
 		books.title,
 		authors.first_name,
 		authors.last_name
@@ -103,6 +104,11 @@ class Review extends CI_Model {
 		FROM reviews
 		LEFT JOIN books on books.id = reviews.book_id
         Group BY title")->result_array();
+	}
+
+	public function get_authors()
+	{
+		return $this->db->query("SELECT id, first_name, last_name FROM authors GROUP BY first_name, last_name;")->result_array();
 	}
 }
 

@@ -24,11 +24,19 @@
 		<input type='hidden' name='user_id' value='<?= $this->session->userdata('id'); ?>'>
 		<textarea id='title' name='title' placeholder='book title'></textarea>
 		<label>Author</label>
-		<select name='author_existing'>
+		<select name='author_id'>
 			<option value='new'>New Author</option>
+<?php
+			foreach($authors as $author)
+			{
+?>
+				<option value="<?= $author['id'] ?>"><?= $author['first_name']." ".$author['last_name'] ?></option>
+<?php
+			}
+?>	
+<!-- 			<option value='#'>Existing Author</option>
 			<option value='#'>Existing Author</option>
-			<option value='#'>Existing Author</option>
-			<option value='#'>Existing Author</option>
+			<option value='#'>Existing Author</option> -->
 		</select>
 		<label>First Name</label>
 		<input type='text' name='first_name'>

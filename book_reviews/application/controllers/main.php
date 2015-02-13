@@ -8,6 +8,11 @@ class Main extends CI_Controller {
 		$this->output->enable_profiler();
 	}
 
+	public function nav()
+	{
+		$this->load->view('nav');
+	}
+
 	public function index()
 	{
 		// $this->session->sess_destroy();
@@ -69,14 +74,17 @@ class Main extends CI_Controller {
 
 	public function add()
 	{
-		$this->load->view('add_review');
+		$this->load->model('Review');
+		$authors = $this->Review->get_authors();
+		$this->load->view('add_review', array('authors' => $authors));
 	}
 
 	public function add_book()
 	{
-		// add to authors table
+
 		$data = $this->input->post();
-		if($data['author_existing'] == 'new')
+
+		if($data['author_id'] == 'new')
 		{
 			// add form validation is unique
 			$input = $this->input->post();
@@ -95,7 +103,13 @@ class Main extends CI_Controller {
 		}
 		else 
 		{
-			echo "this is not a new author!";
+			$input = $this->input->post();	
+			$this->load->Model('Review');
+			$this->Review->add_book($input);
+			$input['book_id'] = $this->db->insert_id();
+			$this->Review->add_review($input);
+			$book_id = $input['book_id'];
+			redirect('/main/get_reviews/'.$book_id);
 		}
 	}
 

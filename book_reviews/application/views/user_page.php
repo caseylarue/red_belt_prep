@@ -31,7 +31,7 @@
 			foreach($reviews as $review)
 			{
 ?>				<div class='review'>
-					<p><?= $review['title'] ?></p>
+					<p><a href='/main/get_reviews/<?= $review['book_id'] ?>'><?= $review['title'] ?></a></p>
 					<p><?= $review['first_name']." ".$review['last_name'] ?></p>
 					<p><?= $review['rating'] ?></p>
 					<p><?= $review['review'] ?></p>

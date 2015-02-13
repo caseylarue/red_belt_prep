@@ -1,0 +1,20 @@
+Book Review site
+
+home - recent book reviews
+home - add book & review
+home - recent book reviews
+home - link book review page
+home - link to user page
+home - display links to book review pages
+
+add_review - drop down of authors (query db)
+add_review - drop down of books
+add_review - redirect to book review page
+
+book_reviews - display reviews
+book_reviews - allow the user logged in to delete their own review only
+book_reviews - allow to add reviews for that book
+
+user_page - display user info
+user_page - show total reviews
+user_page - display links to book_reviews

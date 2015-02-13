@@ -1,0 +1,55 @@
+Questions
+
+#1 My flashdata is not working on registration.
+Where there is an error when someone registers after redirect back ot index.php it does not show the error message in flash data until after refreash.
+
+
+STORIES
+
+* Login - get validations up and running for registration
+
+=================================
+
+#1 /// working on this feature
+reviews page: avoid duplicates in books and authors
+
+=================================
+
+#2 Add Nav bar
+
+=================================
+
+
+3 book_page - able to delete reviews the current user wrote
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
