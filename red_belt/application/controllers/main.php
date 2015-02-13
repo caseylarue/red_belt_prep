@@ -72,8 +72,10 @@ class Main extends CI_Controller {
 	public function home($user_id)
 	{
 		$this->load->model('Friend');
-		$friends = $this->Friend->display_friends($user_id);
-		$data = array('friends' => $friends);
+		$friends = $this->Friend->display_friends_requested($user_id);
+		$added_you = $this->Friend->added_you($user_id);
+		$users = $this->Friend->display_all_users();
+		$data = array('friends' => $friends, 'users' => $users, 'added_you' => $added_you);
 		$this->load->view('home', $data);
 	}
 
@@ -83,6 +85,24 @@ class Main extends CI_Controller {
 		$profile = $this->Friend->display_profile($friend_id);
 		$data = array('profile' => $profile);
 		$this->load->view('profile', $data);
+	}
+
+	public function remove_friend($friendship_id)
+	{
+		$this->load->model('Friend');
+		$this->Friend->remove_friend($friendship_id);
+		$user_id = $this->session->userdata('id');
+		redirect("/main/home/$user_id");
+	}
+
+	public function add_friend($friend_user_id)
+	{
+		$user_id = $this->session->userdata('id');
+		$this->load->model('Friend');
+		// check to 
+		$this->Friend->add_friend($friend_user_id, $user_id);
+		redirect("/main/home/$user_id");
+
 	}
 }
 

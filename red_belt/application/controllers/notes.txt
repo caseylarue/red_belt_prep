@@ -1,21 +1,6 @@
 login - add birth date validation
 
-home - display users not on your friends list
-home - add option to add as a friend
-home - list of this persons friends
-home - link to view profile
-home - link to remove as friend (and put on the users not on your friends list)
 
+- each combination must be unique
 
-
-profile - display user's name
-profile - display user's email
-
-
-SELECT users.first_name as first, users.last_name as last, users2.first_name as friend_first, users2.last_name as friend_last
-FROM users
-LEFT JOIN friendships ON friendships.user_id = users.id
-LEFT JOIN users AS users2 ON users2.id = friendships.friend_id
-ORDER BY users2.last_name;
-
-
+query the db such that the friends see that you have added them!
