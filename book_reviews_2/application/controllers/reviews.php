@@ -15,7 +15,15 @@ class Reviews extends CI_Controller {
 
 	public function home()
 	{
-		$this->load->view('home');
+		$this->load->model('Review');
+		$reviews = $this->Review->get_all_reviews();
+		$books = $this->Review->get_all_books();
+		$this->load->view('home', array('reviews' => $reviews, 'books' => $books));
+	}
+
+	public function nav()
+	{
+		$this->load->view('nav');
 	}
 
 	public function register()
@@ -73,11 +81,16 @@ class Reviews extends CI_Controller {
 
 	public function add()
 	{
-		$this->load->view('add_review');
+		$this->load->model('Review');
+		$authors = $this->Review->get_authors();
+		$books = $this->Review->get_books();
+		$data = array('authors' => $authors, 'books' => $books);
+		$this->load->view('add_review', $data);
 	}
 
 	public function add_review()
 	{
+		// form validation, is this unqiue?
 		$review = $this->input->post();
 		$this->load->model('Review');
 		$this->Review->add_author($review);
@@ -91,9 +104,23 @@ class Reviews extends CI_Controller {
 	public function book_review_page($book_id)
 	{
 		$this->load->model('Review');
-		$this->Review->get_book_reviews($book_id);
-		
-		// $this->load->view('book_review_page', $book_id);
+		$data = $this->Review->get_book_reviews($book_id);
+		$reviews = array(
+				'reviews' => $data
+			);
+		var_dump($reviews);
+		die();
+		$this->load->view('book_review_page', $reviews);
+	}
+
+	public function delete_review($book_id)
+	{
+		$review = $this->input->post();
+		$review['updated_at'] = date('Y-m-d h:i:s');
+		$review['delete'] = 'Y';
+		$this->load->model('Review');
+		$this->Review->delete_review($review);
+		redirect("/reviews/book_review_page/$book_id");
 	}
 
 }
